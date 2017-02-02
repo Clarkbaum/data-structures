@@ -40,8 +40,8 @@ describe('hashTable', function() {
     var v2 = 'val2';
     var oldHashFunction = window.getIndexBelowMaxForKey;
     window.getIndexBelowMaxForKey = function() { return 0; };
-    hashTable.insert(v1, v1);
-    hashTable.insert(v2, v2);
+    hashTable.insert(v1, v1); //both are forced to be at index 0; 0, 'val1'
+    hashTable.insert(v2, v2); //both are forced to be at index 0; 0, 'val2', changes to 1, 'val2'
     expect(hashTable.retrieve(v1)).to.equal(v1);
     expect(hashTable.retrieve(v2)).to.equal(v2);
     window.getIndexBelowMaxForKey = oldHashFunction;
