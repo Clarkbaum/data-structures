@@ -1,3 +1,8 @@
+/*
+  Complexity: Constant
+  Just a constructor. There is a loop, however, it just extends the object with its methods,
+  which will stay constant each instance.
+*/
 var Tree = function(value) {
   var newTree = {};
   newTree.value = value;
@@ -11,10 +16,18 @@ var Tree = function(value) {
 
 var treeMethods = {};
 
+/*
+  Complexity: Constant
+  Pushes one value at a time
+*/
 treeMethods.addChild = function(value) {
   this.children.push(Tree(value))
 };
 
+/*
+  Complexity: Quadradic
+  There is a loop within a recursive function. As tree expands, complexity increases at a fast pace.
+*/
 treeMethods.contains = function(target) {
 
   var result = false;

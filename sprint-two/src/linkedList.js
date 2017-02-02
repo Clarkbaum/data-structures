@@ -3,6 +3,10 @@ var LinkedList = function() {
   list.head = null;
   list.tail = null;
 
+  /*
+    Complexity: Constant
+    There a no loops, and only one value is evaluated each time.
+  */
   list.addToTail = function(value) {
     var node = new Node(value);
     //handle if linkedlist is empty
@@ -15,6 +19,10 @@ var LinkedList = function() {
     }
   };
 
+  /*
+    Complexity: Constant
+    There a no loops, and only one value is evaluated each time.
+  */  
   list.removeHead = function() {
     //handle if one item
     var deletedItem = list.head;
@@ -29,6 +37,11 @@ var LinkedList = function() {
     return deletedItem.value;
   };
 
+  /*
+    Complexity: Linear
+    The recursive function loops over each item in the list.
+    This wouldn't be completely linear though because it ends once the value is found.
+  */
   list.contains = function(target) {
     var result = false;
     var search = function(node){
@@ -48,6 +61,10 @@ var LinkedList = function() {
   return list;
 };
 
+/*
+  Complexity: Constant
+  Just a constructor
+*/  
 var Node = function(value) {
   var node = {};
 

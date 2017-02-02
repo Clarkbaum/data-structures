@@ -1,15 +1,14 @@
+/*
+  Complexity: Constant
+  Just a simple constructor
+*/
 var BinarySearchTree = function(value) {
 
   var newBinary = {};
   newBinary.value = value;
   newBinary.left = null;
   newBinary.right = null;
-  //initialize
-  //left funciton
-  //right function
-  //insert
-  //contains
-  //depthFirstLog
+
   _.extend(newBinary, binarySearchTree);
 
   return newBinary;
@@ -17,6 +16,10 @@ var BinarySearchTree = function(value) {
 
 var binarySearchTree = {};
 
+/*
+  Complexity: Linear
+  Recursion of the search function
+*/
 binarySearchTree.insert = function(value){
  
   var search = function(node) {
@@ -38,6 +41,10 @@ binarySearchTree.insert = function(value){
   search(this);
 };
 
+/*
+  Complexity: Linear
+  Recursion of the search function
+*/
 binarySearchTree.contains = function(target){
   var result = false;
 
@@ -59,6 +66,10 @@ binarySearchTree.contains = function(target){
   return result;
 };
 
+/*
+  Complexity: Linear
+  Recursion of the search function
+*/
 binarySearchTree.depthFirstLog = function(callback){
   var search = function(node) {
     callback(node.value);

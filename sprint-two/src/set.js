@@ -1,3 +1,7 @@
+/*
+  Complexity: Constant
+  Simple constructor
+*/
 var Set = function() {
   var set = Object.create(setPrototype);
   set._storage = {};
@@ -6,6 +10,11 @@ var Set = function() {
 
 var setPrototype = {};
 
+/*
+  Complexity: Constant
+  We thought initially that .hasOwnProperty would cause it to be linear since it is looping
+  over a set of keys, but a Google search proved that .hasOwnProperty is in fact Constant (O(1))
+*/
 setPrototype.add = function(item) {
   //put in this._storage
   //item is the key
@@ -17,6 +26,11 @@ setPrototype.add = function(item) {
   }
 };
 
+/*
+  Complexity: Constant
+  We thought initially that .hasOwnProperty would cause it to be linear since it is looping
+  over a set of keys, but a Google search proved that .hasOwnProperty is in fact Constant (O(1))
+*/
 setPrototype.contains = function(item) {
   //check if this._storage has item
   if(this._storage.hasOwnProperty(item)){
@@ -26,6 +40,11 @@ setPrototype.contains = function(item) {
   }
 };
 
+/*
+  Complexity: Constant
+  We thought initially that .hasOwnProperty would cause it to be linear since it is looping
+  over a set of keys, but a Google search proved that .hasOwnProperty is in fact Constant (O(1))
+*/
 setPrototype.remove = function(item) {
   if(this._storage.hasOwnProperty(item) && this._storage[item] > 1){
     this._storage[item]--;

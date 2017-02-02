@@ -1,10 +1,17 @@
 
-
+/*
+  Complexity: Constant
+  Simple constructor
+*/
 var HashTable = function() {
   this._limit = 8;
   this._storage = LimitedArray(this._limit);
 };
 
+/*
+  Complexity: Linear
+  getIndexBelowMaxForKey contains a for loop making the method linear.
+*/
 HashTable.prototype.insert = function(k, v) {
   var index = getIndexBelowMaxForKey(k, this._limit);
   var curr = this._storage.get(index);
@@ -18,6 +25,11 @@ HashTable.prototype.insert = function(k, v) {
   }
 };
 
+/*
+  Complexity: Linear
+  getIndexBelowMaxForKey contains a for loop making the method linear.
+  Also there is a forEach loop that checks for hash collision
+*/
 HashTable.prototype.retrieve = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
   var result;
@@ -34,6 +46,11 @@ HashTable.prototype.retrieve = function(k) {
   return result;
 };
 
+/*
+  Complexity: Linear
+  getIndexBelowMaxForKey contains a for loop making the method linear.
+  Also there is loop in each
+*/
 HashTable.prototype.remove = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
   this._storage.each(function(value, i, storage){
