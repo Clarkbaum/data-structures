@@ -49,6 +49,7 @@ describe('graph', function() {
     graph.addEdge(3, 2);
     expect(graph.hasEdge(3, 2)).to.equal(true);
     expect(graph.hasEdge(3, 1)).to.equal(false);
+    graph.addEdge(3, 2);
   });
 
   it('should remove edges between nodes', function() {

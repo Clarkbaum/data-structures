@@ -22,7 +22,9 @@ Graph.prototype.contains = function(value) {
       result = true;
     }else{
       target.edges.forEach(function(edge){
-        search(edge);
+        if (target !== edge) {
+          search(edge);
+        }
       });
     }
   }
@@ -40,7 +42,9 @@ Graph.prototype.getNode = function(value){
       result = node;
     }else{
       node.edges.forEach(function(edge){
-        search(edge);
+        if (node !== edge) {
+          search(edge);
+        }
       });
     }
   }
@@ -82,7 +86,9 @@ Graph.prototype.addEdge = function(origin, destination) {
   var fromNode = this.getNode(origin);
   var toNode = this.getNode(destination);
   
-  fromNode.edges.push(toNode);
+  if(fromNode.edges.indexOf(toNode) === -1){
+    fromNode.edges.push(toNode);
+  }
 };
 
 // Remove an edge between any two specified (by value) nodes.
@@ -92,16 +98,16 @@ Graph.prototype.removeEdge = function(origin, destination) {
 
   var index = fromNode.edges.indexOf(toNode);
   fromNode.edges.splice(index, 1);
-
-
 };
 
 // Pass in a callback which will be executed on each node of the graph.
 Graph.prototype.forEachNode = function(cb) {
   var iterate = function(node) {
-    cb(node);
+    cb(node.value);
     node.edges.forEach(function(edge) {
-      iterate(edge);
+      if(node !== edge){
+        iterate(edge);
+      }
     });
   };
   iterate(this);
