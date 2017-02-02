@@ -27,6 +27,21 @@ describe('graph', function() {
     expect(graph.contains(2)).to.equal(false);
   });
 
+  it('should remove nodes that are deeply nested', function(){
+    var x = graph.addNode('x');
+    var y = graph.addNode('y');
+    y.addNode('z');
+    expect(graph.contains('y')).to.be.true;
+    graph.removeNode('y');
+    expect(graph.contains('y')).to.be.false;
+  });
+
+  it('should get and return a node from a value', function(){
+    var x = graph.addNode('x');
+    var y = graph.addNode('y');
+    expect(graph.getNode('y')).to.equal(y);
+  });
+
   it('should create edges between two nodes', function() {
     graph.addNode(2);
     graph.addNode(1);
@@ -41,6 +56,7 @@ describe('graph', function() {
     graph.addNode(5);
     graph.addEdge(5, 4);
     expect(graph.hasEdge(4, 5)).to.equal(true);
+
     graph.removeEdge(5, 4);
     expect(graph.hasEdge(4, 5)).to.equal(false);
   });
