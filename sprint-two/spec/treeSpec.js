@@ -66,4 +66,39 @@ describe('tree', function() {
     expect(node4.parent).to.be.null;
   });
 
+  it('should traverse a tree and call the callback on every value',function(){
+    var result = [];
+    var callback = function(value) {
+      result.push(value);
+    };
+    var node4 = tree.addChild(4);
+    var node7 = node4.addChild(7);
+    var node8 = node4.addChild(8);
+    var node1 = tree.addChild(1);
+    var node2 = node1.addChild(2);
+    tree.traverse(callback);
+    expect(result).to.eql([undefined,4,7,8,1,2]);
+
+  });
+
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

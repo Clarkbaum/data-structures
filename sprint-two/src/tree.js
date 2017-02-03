@@ -39,6 +39,18 @@ treeMethods.removeFromParent = function(){
   this.parent = null;
 }
 
+treeMethods.traverse = function(callback) {
+  //should accept a callback and execute it on every value contained in the tree
+  var search = function(node) {
+    callback(node.value);
+    node.children.forEach(function(child) {
+      search(child);
+    });
+  }
+
+  search(this);
+};
+
 /*
   Complexity: Quadradic
   There is a loop within a recursive function. As tree expands, complexity increases at a fast pace.
