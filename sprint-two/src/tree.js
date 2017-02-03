@@ -6,6 +6,7 @@
 var Tree = function(value) {
   var newTree = {};
   newTree.value = value;
+  newTree.parent = null;
 
   newTree.children = [];
 
@@ -21,8 +22,22 @@ var treeMethods = {};
   Pushes one value at a time
 */
 treeMethods.addChild = function(value) {
-  this.children.push(Tree(value))
+  var newNode = Tree(value);
+  newNode.parent = this;
+  this.children.push(newNode);
+  return newNode;
 };
+
+treeMethods.removeFromParent = function(){
+  //go to parent
+  //go to children array
+  //delete target from children array
+  //go back to target 
+  //make target parents property null
+  var index = this.parent.children.indexOf(this);
+  this.parent.children.splice(index, 1);
+  this.parent = null;
+}
 
 /*
   Complexity: Quadradic

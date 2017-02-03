@@ -41,4 +41,29 @@ describe('tree', function() {
     expect(tree.contains(8)).to.equal(true);
   });
 
+  it('should have a root node that has a parent equal to null', function(){
+    tree.addChild(2);
+    tree.addChild(6);
+    expect(tree.parent).to.be.null
+  });
+
+  it('should have a child elements that point to their parent node', function(){
+    var node4 = tree.addChild(4);
+    var node1 = node4.addChild(1);
+    expect(node4.parent).to.equal(tree);
+    expect(node1.parent).to.equal(node4);
+  });
+
+  it('should diassociate the tree with its parent in both directions', function(){
+    var node4 = tree.addChild(4);
+    var node2 = tree.addChild(2);
+    var node3 = node4.addChild(3);
+    var node1 = node4.addChild(1);
+    expect(tree.contains(4)).to.be.true;
+    expect(node4.parent).to.equal(tree);
+    node4.removeFromParent();
+    expect(tree.contains(4)).to.be.false;
+    expect(node4.parent).to.be.null;
+  });
+
 });
