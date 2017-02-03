@@ -45,4 +45,48 @@ describe('binarySearchTree', function() {
 
     expect(fn).to.throw(Error);
   });
+
+  it('breadth search should return binary tree in ordered list', function(){
+    binarySearchTree.insert(2);
+    binarySearchTree.insert(1);
+    binarySearchTree.insert(4);
+    binarySearchTree.insert(3);
+    binarySearchTree.insert(7);
+    binarySearchTree.insert(10);
+    binarySearchTree.insert(8);
+    expect(binarySearchTree.breadthFirstLog()).to.eql([1,2,3,4,5,7,8,10]);
+  });
+
+  it('should correctly recalulate a tree thats not balanced', function(){
+    binarySearchTree.insert(6);
+    binarySearchTree.insert(7);
+    binarySearchTree.insert(8);
+    binarySearchTree.insert(9);
+    binarySearchTree.insert(10);
+    binarySearchTree.insert(11);
+    binarySearchTree.rebalance();
+    expect(binarySearchTree.value).to.equal(8);
+    expect(binarySearchTree.left.value).to.equal(6);
+    expect(binarySearchTree.left.left.value).to.equal(5);
+    expect(binarySearchTree.left.right.value).to.equal(7);
+    expect(binarySearchTree.right.value).to.equal(10);
+    expect(binarySearchTree.right.left.value).to.equal(9);
+    expect(binarySearchTree.right.right.value).to.equal(11);
+
+  })
+
+  it('should correctly return the depths array of the tree', function(){
+    binarySearchTree.insert(4);
+    binarySearchTree.insert(1);
+    binarySearchTree.insert(10);
+    binarySearchTree.insert(6);
+    binarySearchTree.insert(3);
+    binarySearchTree.insert(11);
+    binarySearchTree.insert(14);
+    binarySearchTree.insert(15);
+    binarySearchTree.insert(8);
+    expect(binarySearchTree.depths()).to.eql([4,4,5]);
+  });
+
+
 });

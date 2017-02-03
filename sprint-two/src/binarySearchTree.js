@@ -2,12 +2,13 @@
   Complexity: Constant
   Just a simple constructor
 */
-var BinarySearchTree = function(value) {
+var BinarySearchTree = function(value, depth) {
 
   var newBinary = {};
   newBinary.value = value;
   newBinary.left = null;
   newBinary.right = null;
+  newBinary.depth = depth || 1;
 
   _.extend(newBinary, binarySearchTree);
 
@@ -27,13 +28,13 @@ binarySearchTree.insert = function(value){
       if (node.left) {
         search(node.left);
       } else {
-        node.left = BinarySearchTree(value);
+        node.left = BinarySearchTree(value, node.depth + 1);
       }
     } else if (value > node.value) {
       if (node.right) {
         search(node.right);
       } else {
-        node.right = BinarySearchTree(value);
+        node.right = BinarySearchTree(value, node.depth + 1);
       }
     } else {
       throw new Error("Cannot add duplicate value");
@@ -41,7 +42,59 @@ binarySearchTree.insert = function(value){
   };
 
   search(this);
+
+  var depths = binarySearchTree.depths();
+  var min = Math.min.apply(null, depths);
+  var max = Math.max.apply(null, depths);
+  if(min * 2 <= max){
+    //need to rebalance
+  }
+
+
 };
+
+binarySearchTree.depths = function(){
+  //arry of depths returned
+  var results = [];
+
+  var search = function(node) {
+    //if node has no left or right, they are null
+    //push to .depth to results
+    if(!node.left && !node.right){
+      results.push(node.depth);
+    }
+    if(node.left){
+      search(node.left)
+    }
+    if(node.right){
+      search(node.right);
+    }
+  }
+
+  search(this);
+
+  return results;
+}
+
+binarySearchTree.breadthFirstLog = function(){
+  //if(left) recurse
+  //log(value);
+  //if(right) recurse
+  var result = [];
+
+  var search = function(node) {
+    if(node.left){
+      search(node.left);
+    }
+    result.push(node.value);
+    if(node.right){
+      search(node.right);
+    }
+  }
+
+  search(this);
+  return result;
+}
 
 /*
   Complexity: Linear
@@ -66,6 +119,34 @@ binarySearchTree.contains = function(target){
 
   search(this);
   return result;
+};
+
+binarySearchTree.rebalance = function() {
+  //if too deep rebalance
+  //too deep means some nodes have 2 or more children then any other
+  //call breadthFirstLog to get array of sorted values
+  //remake tree using above array
+  var sorted = this.breadthFirstLog();
+
+  var makeTree = function(sorted, depth) {
+    if(sorted == false){
+      return null;
+    }
+
+    var midIndex = Math.floor((sorted.length - 1) / 2);
+    var midValue = sorted[midIndex];  //=>5
+
+    var left = sorted.slice(0, midIndex); //=>[1,2,3,4]
+    var right = sorted.slice(midIndex + 1); // => [6,7,8,9,10]
+    var newNode = BinarySearchTree(midValue, depth);
+    newNode.left = makeTree(left, depth + 1);
+    newNode.right = makeTree(right, depth + 1);
+
+    return newNode;
+  }
+
+  Object.assign(this, makeTree(sorted, 1));
+
 };
 
 /*
