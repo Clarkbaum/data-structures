@@ -11,12 +11,14 @@ describe('set', function() {
     expect(set.remove).to.be.a('function');
   });
 
-  it('should add values to a set', function() {
+  var thisIsATest = function() {
     set.add('Susan Sarandon');
     set.add('Danny Glover');
     expect(set.contains('Danny Glover')).to.equal(true);
     expect(set.contains('Susan Sarandon')).to.equal(true);
-  });
+  };
+
+  it('should add values to a set', thisIsATest);
 
   it('should increment the value when adding more items in set', function(){
     set.add('Joe');

@@ -35,6 +35,8 @@ binarySearchTree.insert = function(value){
       } else {
         node.right = BinarySearchTree(value);
       }
+    } else {
+      throw new Error("Cannot add duplicate value");
     }
   };
 
