@@ -87,6 +87,14 @@ describe('binarySearchTree', function() {
     binarySearchTree.insert(8);
     expect(binarySearchTree.depths()).to.eql([4,4,5]);
   });
-
+  it('should automatically rebalance binary tree when a insertion unbalances it', function(){
+    binarySearchTree.insert(4);
+    binarySearchTree.insert(2);
+    binarySearchTree.insert(3);
+    expect(binarySearchTree.depths()).to.eql([4])
+    binarySearchTree.insert(10);
+    binarySearchTree.insert(8);
+    
+  });
 
 });

@@ -46,8 +46,13 @@ binarySearchTree.insert = function(value){
   var depths = binarySearchTree.depths();
   var min = Math.min.apply(null, depths);
   var max = Math.max.apply(null, depths);
+  //if one item in array then the tree must be a long chain
   if(min * 2 <= max){
     //need to rebalance
+    // if long chain depths will be one item and min/max will equal
+    //and min are going to be equal
+    //also a chain of 3 should be considered unbalanced
+    this.rebalance();
   }
 
 
