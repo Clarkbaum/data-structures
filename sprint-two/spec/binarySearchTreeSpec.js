@@ -14,10 +14,11 @@ describe('binarySearchTree', function() {
   it('should insert values at the correct location in the tree', function() {
     binarySearchTree.insert(2);
     binarySearchTree.insert(3);
+    //should rebalance
     binarySearchTree.insert(7);
     binarySearchTree.insert(6);
-    expect(binarySearchTree.left.right.value).to.equal(3);
-    expect(binarySearchTree.right.left.value).to.equal(6);
+    expect(binarySearchTree.left.value).to.equal(2);
+    expect(binarySearchTree.right.right.left.value).to.equal(6);
   });
 
   it('should have a working "contains" method', function() {
@@ -33,8 +34,9 @@ describe('binarySearchTree', function() {
     var func = function(value) { array.push(value); };
     binarySearchTree.insert(2);
     binarySearchTree.insert(3);
+    //should rebalance
     binarySearchTree.depthFirstLog(func);
-    expect(array).to.eql([5, 2, 3]);
+    expect(array).to.eql([3, 5, 2]);
   });
 
   it('should not add a value if it is already inside tree', function(){
@@ -78,6 +80,7 @@ describe('binarySearchTree', function() {
   it('should correctly return the depths array of the tree', function(){
     binarySearchTree.insert(4);
     binarySearchTree.insert(1);
+    //should rebalance
     binarySearchTree.insert(10);
     binarySearchTree.insert(6);
     binarySearchTree.insert(3);
@@ -85,15 +88,25 @@ describe('binarySearchTree', function() {
     binarySearchTree.insert(14);
     binarySearchTree.insert(15);
     binarySearchTree.insert(8);
-    expect(binarySearchTree.depths()).to.eql([4,4,5]);
+    expect(binarySearchTree.depths()).to.eql([3,5,6]);
   });
+
   it('should automatically rebalance binary tree when a insertion unbalances it', function(){
     binarySearchTree.insert(4);
     binarySearchTree.insert(2);
+    //should rebalance
+    expect(binarySearchTree.value).to.eql(4);
     binarySearchTree.insert(3);
-    expect(binarySearchTree.depths()).to.eql([4])
-    binarySearchTree.insert(10);
+    binarySearchTree.insert(6);
     binarySearchTree.insert(8);
+    binarySearchTree.insert(10);
+    binarySearchTree.insert(11);
+    binarySearchTree.insert(12);
+    //should rebalance
+    expect(binarySearchTree.value).to.eql(6);
+    expect(binarySearchTree.left.value).to.eql(3);
+    expect(binarySearchTree.right.value).to.eql(10);
+
     
   });
 
