@@ -36,7 +36,32 @@ describe('set', function() {
     set.add('Bob');
     set.add('Bob');
     set.remove('Bob');
-    expect(set._storage['Bob'] === 1).to.equal(true);
+    expect(set._storage['Bob']).to.equal(1);
+  });
+
+  it('should be capable of handling inputs of all types', function(){
+    set.add('Joey');
+    set.add([1,2,3,5]);
+    set.add(true);
+    set.add({'key1':4});
+    set.add(5);
+    expect(set.contains('Joey')).to.be.true
+    expect(set.contains([1,2,3,5])).to.be.true //should we make the contains input a string?
+    expect(set.contains(true)).to.be.true
+    expect(set.contains({'key1':4})).to.be.true
+    expect(set.contains(5)).to.be.true
+  });
+
+  it('should be capable of incrementing the counter of non string values',function(){
+    set.add('Joey');
+    set.add([1,2,3,5]);
+    set.add(true);
+    set.add(true);
+    set.add([1,2,3,5]);
+    expect(set._storage[String([1,2,3,5])][1]).to.equal(2); //assuming as of now storage item look up is [any value][array index]
+    expect(set._storage[String(true)][1]).to.equal(2);
+    expect(set._storage['Joey'][1]).to.equal(1);
+
   });
 
 });

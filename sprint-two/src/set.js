@@ -16,9 +16,7 @@ var setPrototype = {};
   over a set of keys, but a Google search proved that .hasOwnProperty is in fact Constant (O(1))
 */
 setPrototype.add = function(item) {
-  //put in this._storage
-  //item is the key
-  //add key and value
+  //stringified version of item : [item value, counter];
   if(this._storage.hasOwnProperty(item)){
     this._storage[item]++;
   }else{
